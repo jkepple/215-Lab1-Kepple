@@ -124,14 +124,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="temp.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="ABag.h" />
     <ClInclude Include="bagADT.h" />
     <ClInclude Include="BDictionary.h" />
     <ClInclude Include="dictionaryADT.h" />
     <ClInclude Include="kvpair.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\bagADTfiles\bagtestmain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

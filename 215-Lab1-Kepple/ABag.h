@@ -2,7 +2,7 @@
 //starting the ABag.h file on 2/2/2026. Building the body of the skeleton left in bagADT.h
 
 #include "bagADT.h"
-#include <stdlib.h>
+#include <iostream>
 #include <memory> //for smart pointers
 
 //addItemm and +=, use the add function is the same as +=
@@ -16,20 +16,22 @@ class ABag : public Bag<T> ///inherits bagADT
 private: 
 	std::unique_ptr<T[]> storedItems; //declaration of array, smart ptr used for managing memory automatically, deletion of it too
 	int capacity = 10; //size declared per test
-	int used = 0; //index starting at 0
+	int items = 0; //index starting at 0
 public:
 	ABag() : storedItems(new T[10]) {} ///constructor of array storedItems; can now hold 10 of T objects
 
 	~ABag() override = default; //destructor
 
-	int bagCapacity() const override { return capacity; }
-	int numItems() const override { return used; }
+	int bagCapacity() const override {return capacity;}
+	int numItems() const override {return items;}
 
 	//Functions
 	bool addItem(const T& item) override {
-		if (used >= capacity) return false;
-		storedItems[used] = item;
-		++used;
+		if (items >= capacity) { ///returns false if no more room in array
+			return false;
+		}
+		storedItems[items] = item; ///otherwise add item to storedItems, increase int items by 1
+		items++;
 		return true;
 	}
 
@@ -38,24 +40,49 @@ public:
 	}
 
 	void emptyBag() override {
-		used = 0;  // resets the count
+		items = 0;  // resets the count
 	}
 
-	// Stub functions for later build
 	bool removeItem(T& item) override {
-		return false;  // Stub: not found
+		for (int i = 0, i < items; i++) {//iterates through array
+			if (storedItem[i] == item) {///check if i == caller's referenced 'item' to remove
+				item = storedItem[i];///copy value to item
+				for (int k = i; k < items - 1; k++) {///for loop to overwrite caller's 'item', shifting the rest, decreasing the size
+					storedItems[k] = storedItems[k+1];
+				}
+				--items;///decrease size counter
+				return true;
+			}
+		}
+		return false;
 	}
 
 	bool removeTop(T& returnValue) override {
-		return false;  // Stub: empty
+		if (items == 0) {///same check as addItem
+			return false;
+		}
+		returnValue = storedItems[items-1]; ///when true, grabs the top value, deletes item
+		--items;
+		return true;
 	}
 
 	bool find(T& returnValue) const override {
-		return false;  // Stub: not found
+		for (int i = 0; i < items; i++) {
+			if (storedItems[i] == returnValue) {
+				returnValue = storedItems[i];
+				return true;
+			}
+		}
+		return false;
 	}
 
 	bool inspectTop(T& item) const override {
-		return false;  // Stub: empty
+		if (items == 0) {///same check as addItem
+			return false;
+		}
+		
+		item = storedItems[items - 1]; ///when true, removes top element to caller to 'peek' at the top of the array
+		return true;
 	}
 	
 };
