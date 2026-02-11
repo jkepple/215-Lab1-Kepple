@@ -18,9 +18,13 @@ private:
 	int capacity = 10; //size declared per test
 	int items = 0; //index starting at 0
 public:
-	ABag() : storedItems(new T[10]) {} ///constructor of array storedItems; can now hold 10 of T objects
+	///for my own understanding: the complier chooses what constructor to use when creating an object of any class, hence why I need multple constructors for different scenarios==overloading
+	ABag() : storedItems(new T[10]), capacity(10), items(0) {} //default constructor
 
-	~ABag() override = default; //destructor
+	ABag(int size) : storedItems(new T[size]), capacity(size), items(0) {} //when test declares size, passing from dict to bag
+
+	~ABag() override = default; //destructor -- smart pointer handles memory deallocation   
+
 
 	int bagCapacity() const override {return capacity;}
 	int numItems() const override {return items;}
@@ -44,9 +48,9 @@ public:
 	}
 
 	bool removeItem(T& item) override {
-		for (int i = 0, i < items; i++) {//iterates through array
-			if (storedItem[i] == item) {///check if i == caller's referenced 'item' to remove
-				item = storedItem[i];///copy value to item
+		for (int i = 0; i < items; i++) {//iterates through array
+			if (storedItems[i] == item) {///check if i == caller's referenced 'item' to remove
+				item = storedItems[i];///copy value to item
 				for (int k = i; k < items - 1; k++) {///for loop to overwrite caller's 'item', shifting the rest, decreasing the size
 					storedItems[k] = storedItems[k+1];
 				}

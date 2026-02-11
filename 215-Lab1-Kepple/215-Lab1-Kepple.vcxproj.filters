@@ -30,8 +30,10 @@
     <ClInclude Include="kvpair.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\bagADTfiles\bagtestmain.cpp">
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="bagtestmain.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
+    </ClCompile>
   </ItemGroup>
 </Project>

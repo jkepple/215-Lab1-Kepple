@@ -131,7 +131,7 @@
     <ClInclude Include="kvpair.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\bagADTfiles\bagtestmain.cpp" />
+    <ClCompile Include="bagtestmain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

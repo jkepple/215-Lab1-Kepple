@@ -14,6 +14,9 @@ private:
 public:
 	///constructor and destructor
 	BDictionary() {}
+
+	BDictionary(int capacity) : theBag(capacity) {}
+
 	~BDictionary() override = default;
 
 	///function implementations
